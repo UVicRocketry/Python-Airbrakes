@@ -71,11 +71,40 @@ def generate_covariance_matrix(sensor_data):
 
 def predict(system_state):
     pass
+
+    """
+    recursive function taking sensor data and running it through an algorithm to get next possible sensor data
+    best to use changes in sensor data (acceleration, velocity)
+    
+    are we getting acceleration component-wise or magnitude wise? we only want to consider vertical component of
+    acceleration. component-wise acceleration data would be great.
+    
+    Kieran's idea: instead of implementing algorithm all the way to velocity zero at 10k, implement to a certain 
+    velocity at a certain height below 10k which would result in velocity zero at 10k. This is because the airbrakes
+    provide negligible force at low velocities, which means implementing the kalman filter would take extra computing
+    resources that are not necessary (and the math and programming for that would be more difficult to implement).
+    to do this: run airbrakes code to get the rocket to a certain speed at a certain height (calculated in another
+    function, or hard coded based on weight of rocket?) and then shut off the airbrakes code.
+    """
+
     # TODO consult math person this is too hard (kalman filter)
 
 
 def update(system_state, sensor_data):
     pass
+
+    """
+    this function is used to update the algorithm to account for error.
+    
+    let's say the kalman function makes a prediction halfway through the flight about the state of the rocket at
+    3/4 of the way through the flight. at 3/4 of the way through, the sensor data would be compared with the predicted
+    state and the kalman "predict" algorithm would be changed based on the difference between the two.
+    
+    this would be happening constantly: prediction, comparison, and algorithm improvement as the rocket runs.
+    
+    !!we should have the rocket self adjust to follow a pre-calculated flight path!!
+    """
+
     # TODO consult math person this is too hard (kalman filter)
 
 
